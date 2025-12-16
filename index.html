@@ -49,12 +49,12 @@
       display:none;
     }
 
-    /* hamburger icon */
+    /* hamburger icon (always visible) */
     .menu-icon{
       position:absolute;
       right:0;
       cursor:pointer;
-      display:none;
+      display:flex;
       flex-direction:column;
       justify-content:center;
       align-items:center;
@@ -234,13 +234,11 @@
     }
 
     @media (max-width:768px){
-      /* show hamburger, hide menu by default */
-      .menu-icon{
-        display:flex;
-      }
       .nav-menu{
         justify-content:flex-start;
       }
+
+      /* collapse menu under bar */
       nav ul{
         position:absolute;
         top:100%;
@@ -253,8 +251,9 @@
         padding:10px 0 16px;
         display:none;
       }
-      /* when checkbox checked, show menu */
-      #nav-toggle:checked + .menu-icon + ul{
+
+      /* when menu button (checkbox) is checked show the menu */
+      #nav-toggle:checked + label + ul{
         display:flex;
       }
 
@@ -305,12 +304,12 @@
     <div class="nav-menu">
       <!-- hidden checkbox -->
       <input type="checkbox" id="nav-toggle">
-      <!-- hamburger icon as label -->
+      <!-- hamburger icon as label (menu button) -->
       <label for="nav-toggle" class="menu-icon">
         <span></span><span></span><span></span>
       </label>
 
-      <!-- menu list (must come after label for CSS selector) -->
+      <!-- menu list -->
       <ul id="mainMenu">
         <li><a href="#home">Home</a></li>
         <li><a href="#order">Order</a></li>
