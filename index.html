@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Landing Page - Simplotel Assignment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 6%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: #ff4444;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: #000;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 4rem 6%;
+            max-width: 1600px;
+            margin: 0 auto;
+            gap: 4rem;
+            min-height: 70vh;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #000;
+            font-weight: 700;
+            letter-spacing: 8px;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff4444;
+            color: #fff;
+            padding: 0.9rem 2.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #dd3333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 68, 68, 0.4);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Features Section */
+        .features {
+            background: #f8f8f8;
+            padding: 5rem 6%;
+        }
+
+        .features-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3.5rem;
+            color: #000;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .feature-content {
+            padding: 1.8rem;
+            text-align: center;
+        }
+
+        .feature-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.3rem;
+            color: #000;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .feature-button {
+            display: inline-block;
+            padding: 0.7rem 2.2rem;
+            background: #ff4444;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-button:hover {
+            background: #dd3333;
+            transform: scale(1.05);
+        }
+
+        /* Tablet Responsive (768px - 1024px) */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1rem 5%;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3.5rem 5%;
+                gap: 3rem;
+            }
+
+            .hero-content {
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+                letter-spacing: 6px;
+            }
+
+            .hero-content p {
+                text-align: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .features {
+                padding: 4rem 5%;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+                letter-spacing: 5px;
+            }
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 65px;
+                flex-direction: column;
+                background: #fff;
+                width: 100%;
+                text-align: center;
+                transition: right 0.3s ease;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.15);
+                padding: 2rem 0;
+                gap: 1.5rem;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(8px, -8px);
+            }
+
+            nav {
+                padding: 0.9rem 4%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+                letter-spacing: 2px;
+            }
+
+            .hero {
+                padding: 3rem 4%;
+                min-height: auto;
+                gap: 2.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.3rem;
+                letter-spacing: 5px;
+            }
+
+            .hero-content p {
+                font-size: 0.95rem;
+                margin-bottom: 1.8rem;
+            }
+
+            .cta-button {
+                padding: 0.85rem 2.2rem;
+                font-size: 0.95rem;
+            }
+
+            .features {
+                padding: 3.5rem 4%;
+            }
+
+            .section-title {
+                font-size: 1.9rem;
+                margin-bottom: 2.5rem;
+                letter-spacing: 4px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .feature-card img {
+                height: 240px;
+            }
+
+            .feature-content {
+                padding: 1.5rem;
+            }
+
+            .feature-content h3 {
+                font-size: 1.25rem;
+                letter-spacing: 3px;
+            }
+        }
+
+        /* Small Mobile (max-width: 480px) */
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+                letter-spacing: 3px;
+            }
+
+            .feature-card img {
+                height: 200px;
+            }
+
+            .feature-content h3 {
+                font-size: 1.15rem;
+                letter-spacing: 2px;
+            }
+
+            .feature-button {
+                padding: 0.65rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra Small Devices (max-width: 360px) */
+        @media (max-width: 360px) {
+            nav {
+                padding: 0.8rem 3%;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .hero {
+                padding: 2.5rem 3%;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+                letter-spacing: 3px;
+            }
+
+            .features {
+                padding: 3rem 3%;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+        }
+
+        /* Large Screen Support */
+        @media (min-width: 1600px) {
+            nav, .hero, .features-container {
+                max-width: 1800px;
+            }
+        }
+
+        /* Zoom Level Support */
+        @media (min-resolution: 120dpi) {
+            body {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-resolution: 144dpi) {
+            body {
+                font-size: 16px;
+            }
+        }
+
+        /* Prevent Text Overflow */
+        h1, h2, h3, p, a {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        /* Image Loading Optimization */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">LOREM IPSUM</div>
+            <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#order">Order Food</a></li>
+                <li><a href="#restaurant">Restaurant</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>LOREM IPSUM</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id est vitae dolor rhoncus tristique. Maecenas metus quam, rhoncus euismod lorem in, sollicitudin viverra eros. Donec dictum luctus quam ut tristique. Curabitur nec faucibus purus. Quisque congue sem nec justo mollis, in tincidunt erat pretium. Sed pulvinar, massa ac porta viverra.</p>
+            <a href="#order" class="cta-button">Click Me</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&h=800&fit=crop&q=80" alt="Delicious burger with fries" loading="lazy">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Lorem Ipsum Set Ademir</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop&q=80" alt="Restaurant outdoor seating" loading="lazy">
+                    <div class="feature-content">
+                        <h3>Lorem Ipsum</h3>
+                        <a href="#" class="feature-button">Click</a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=600&fit=crop&q=80" alt="Gourmet food dishes" loading="lazy">
+                    <div class="feature-content">
+                        <h3>Lorem Ipsum</h3>
+                        <a href="#" class="feature-button">Click</a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&h=600&fit=crop&q=80" alt="Restaurant nightlife" loading="lazy">
+                    <div class="feature-content">
+                        <h3>Lorem Ipsum</h3>
+                        <a href="#" class="feature-button">Click</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.getElementById('menuToggle');
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.getElementById('menuToggle');
+            
+            if (!nav.contains(event.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+
+        // Close menu when link is clicked (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.getElementById('navLinks');
+                const menuToggle = document.getElementById('menuToggle');
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
